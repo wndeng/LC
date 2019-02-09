@@ -6,99 +6,26 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <unordered_map>
+#include <bitset>
+#include <queue>
 
 using namespace std;
 
-
- struct ListNode {
-     int val;
-     ListNode *next;
-     ListNode(int x) : val(x), next(NULL) {}
- };
- 
-class Solution {
-public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode* newH = nullptr;
-        ListNode* temp1 = nullptr, *temp2 = nullptr;
-
-        while(head) {
-            temp2 = head;
-            head = head->next;
-            temp1 = newH;
-            newH = temp2;
-            newH->next = temp1;
-        }
-        cout << newH->val << endl;
-        return newH;
-    }
-};
-
-void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+int qs(vector<int>& tmp, int pos) {
+	return _qs(tmp, pos, 0, tmp.size()-1);
 }
 
-void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+_qs(vector<int>& tmp, int pos, int i, int j) {
+	int l = tmp[i], j = tmp[j], m = tmp[i + (j-i)/2];
+	
 }
 
-vector<int> stringToIntegerVector(string input) {
-    vector<int> output;
-    trimLeftTrailingSpaces(input);
-    trimRightTrailingSpaces(input);
-    input = input.substr(1, input.length() - 2);
-    stringstream ss;
-    ss.str(input);
-    string item;
-    char delim = ',';
-    while (getline(ss, item, delim)) {
-        output.push_back(stoi(item));
-    }
-    return output;
-}
+_partition(vector<int>& tmp, int mid, int i, int j) {
 
-ListNode* stringToListNode(string input) {
-    // Generate list from the input
-    vector<int> list = stringToIntegerVector(input);
-
-    // Now convert that list into linked list
-    ListNode* dummyRoot = new ListNode(0);
-    ListNode* ptr = dummyRoot;
-    for(int item : list) {
-        ptr->next = new ListNode(item);
-        ptr = ptr->next;
-    }
-    ptr = dummyRoot->next;
-    delete dummyRoot;
-    return ptr;
-}
-
-string listNodeToString(ListNode* node) {
-    if (node == nullptr) {
-        return "[]";
-    }
-
-    string result;
-    while (node) {
-        result += to_string(node->val) + ", ";
-        node = node->next;
-    }
-    return "[" + result.substr(0, result.length() - 2) + "]";
 }
 
 int main() {
-    string line;
-    while (getline(cin, line)) {
-        ListNode* head = stringToListNode(line);
-        
-        ListNode* ret = Solution().reverseList(head);
+    vector<int> tmp = {1, 3, 5, 1, 6, 2, 3, 6, 2, 3, 5, 1, 2, 3, 5};
 
-        string out = listNodeToString(ret);
-        cout << out << endl;
-    }
-    return 0;
 }
