@@ -12,20 +12,17 @@
 
 using namespace std;
 
-int qs(vector<int>& tmp, int pos) {
-	return _qs(tmp, pos, 0, tmp.size()-1);
-}
-
-_qs(vector<int>& tmp, int pos, int i, int j) {
-	int l = tmp[i], j = tmp[j], m = tmp[i + (j-i)/2];
-	
-}
-
-_partition(vector<int>& tmp, int mid, int i, int j) {
-
+int mid = 2;
+int size = 6;
+inline int virtualIndex(int i) {
+    if(i <= mid) return (mid-i)*2;
+    return 1 + 2*(size - i - 1);
 }
 
 int main() {
     vector<int> tmp = {1, 3, 5, 1, 6, 2, 3, 6, 2, 3, 5, 1, 2, 3, 5};
+    for(int i = 0; i <= 5; ++i) {
+    	cout << i << " " << virtualIndex(i) << endl;
+    }
 
 }

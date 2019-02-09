@@ -25,7 +25,7 @@ int qs(vector<int>& tmp, int pos, int i, int j) { // left & right inclusive.
 	partition(tmp, tmp[m], i, j, boundLeft, boundRight);
 	if(pos > boundLeft) {
 		if(pos >= boundRight) return qs(tmp, pos, boundRight, j);
-		return tmp[m];
+		return tmp[pos];
 	}
 	return qs(tmp, pos, i, boundLeft);
 }
@@ -36,12 +36,15 @@ int quickSelect(vector<int>& tmp, int pos) { // 0 indexing for pos
 }
 
 int main() {
-    std::vector<int> tmp = {1, 3, 5, 1, 6, 2, 3, 6, 2, 3, 5, 1, 2, 3, 5};
+    std::vector<int> tmp = {1,2,3,3,5,5,2,4,5,2,3,2};
     print(tmp);
     sort(tmp.begin(), tmp.end());
     print(tmp);
     int size = tmp.size();
-    for(int i = 0; i < size; ++i) cout << quickSelect(tmp, i) << " ";
+    for(int i = 0; i < size; ++i) {
+    	if(i % 3 == 0) std::vector<int> tmp = {1,2,3,3,5,5,2,4,5,2,3,2};
+    	cout << quickSelect(tmp, i) << " ";
+    }
     cout << endl;
 
 }
